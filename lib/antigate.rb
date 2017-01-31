@@ -59,7 +59,7 @@ module Antigate
   		end
   	end
 
-  	def add(captcha_file, ext)
+  	def add(captcha_file, ext=nil)
       if captcha_file.include?("http")
     	  uri = URI.parse(url)
     	  http = Net::HTTP.new(uri.host, uri.port)
@@ -68,7 +68,8 @@ module Antigate
     	  response = http.request(request)
     	  captcha = response.body
       else
-        captcha = File.read("#{captcha_file}.#{ext}")
+        captcha_path = ext.nil? ? captcha_file : "#{captcha_file}.#{ext}"
+        captcha = File.read(captcha_path)
       end
   		if captcha
   			params = {
