@@ -27,7 +27,7 @@ module Antigate
   		@domain = "antigate.com"
   	end
 
-  	def recognize(captcha_file, ext)
+  	def recognize(captcha_file, ext=nil)
   		added = nil
   		loop do
   			added = add(captcha_file, ext)
@@ -59,7 +59,7 @@ module Antigate
   		end
   	end
 
-  	def add(captcha_file, ext=nil)
+  	def add(captcha_file, ext)
       if captcha_file.include?("http")
     	  uri = URI.parse(url)
     	  http = Net::HTTP.new(uri.host, uri.port)
